@@ -20,6 +20,11 @@ if(isset($_GET['tipe'], $_GET['id'])){
 		mysqli_query($conn, $query);
 		header("location: daftar_kandidat.php");
 		exit;
+	}elseif($tipe == 'akun'){
+		$query = "DELETE FROM `user` WHERE `id` = {$id}";
+		mysqli_query($conn, $query);
+		header("location: daftar_akun.php");
+		exit;
 	}else{
 		exit;
 	}
