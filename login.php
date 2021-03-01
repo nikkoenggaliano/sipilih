@@ -1,8 +1,55 @@
+<?php 
+
+include 'config/config.php';
+
+if(isset($_POST['username'], $_POST['password'])){
+	$username = _Filters($_POST['username']);
+	$query = "SELECT * FROM `user` WHERE `username` = '{$username}'";
+	$exec  = mysqli_query($conn, $query);
+	if(mysqli_num_rows($exec) != 1){
+
+		$_SESSION['header'] = 'Hays!!';
+		$_SESSION['isi'] = 'Username / Password tidak ditemukan!';
+		$_SESSION['type'] = 'error';
+		header("location: login.php");
+		exit;
+	}else{
+
+		$data = mysqli_fetch_array($exec); 
+
+
+		if(password_verify($_POST['password'], $data['password'])){
+			$_SESSION['id']    = $data['id'];
+			$_SESSION['dptid'] = $data['dptid'];
+			$_SESSION['username'] = $username;
+			$_SESSION['role'] = $data['role'];
+
+			if($data['role'] == 'user'){
+				header("location: index.php");
+				exit;	
+			}else{
+
+				header("location: admin/");
+				exit;
+			}
+
+		}else{
+
+			$_SESSION['header'] = 'Hays!!';
+			$_SESSION['isi'] = 'Username / Password tidak ditemukan!';
+			$_SESSION['type'] = 'error';
+			header("location: login.php");
+			exit;
+
+		}
+
+	}
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
-
-
-<!-- Mirrored from codervent.com/syndash/demo/vertical/authentication-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 31 Jan 2021 10:24:07 GMT -->
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
@@ -19,9 +66,18 @@
 	<link rel="stylesheet" href="assets/css/icons.css" />
 	<!-- App CSS -->
 	<link rel="stylesheet" href="assets/css/app.css" />
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body class="bg-login">
+	<?php 
+		if(isset($_SESSION['header'], $_SESSION['isi'], $_SESSION['type'])){
+			alerta($_SESSION['header'], $_SESSION['isi'], $_SESSION['type']);
+			unset($_SESSION['header']);
+			unset($_SESSION['isi']);
+			unset($_SESSION['type']);
+		}
+	?>
 	<!-- wrapper -->
 	<div class="wrapper">
 		<div class="section-authentication-login d-flex align-items-center justify-content-center">
@@ -38,13 +94,14 @@
 									<div class="login-separater text-center"> <span>Masuk dengan Akun Anda</span>
 										<hr/>
 									</div>
+									<form action="#" method="POST">
 									<div class="form-group mt-4">
-										<label>NIK (Nomer Induk Keluarga)</label>
-										<input type="text" class="form-control" placeholder="Masukan NIK Anda" />
+										<label>Nama Pengguna</label>
+										<input type="text" class="form-control" name="username" placeholder="Masukan Nama Pengguna Anda" />
 									</div>
 									<div class="form-group">
-										<label>Password</label>
-										<input type="password" class="form-control" placeholder="Masukan Password" />
+										<label>Kata Sandi</label>
+										<input type="password" class="form-control" name="password" placeholder="Masukan Password" />
 									</div>
 									<div class="form-row">
 										<div class="form-group col">
@@ -57,13 +114,12 @@
 										</div>
 									</div>
 									<div class="btn-group mt-3 w-100">
-										<button type="button" class="btn btn-primary btn-block">Log In</button>
-										<button type="button" class="btn btn-primary"><i class="lni lni-arrow-right"></i>
-										</button>
+										<input type="submit" class="btn btn-primary btn-block" value="Masuk">
 									</div>
+									</form>
 									<hr>
 									<div class="text-center">
-										<p class="mb-0">Tidak punya akun? <a href="authentication-register.html">Daftar</a>
+										<p class="mb-0">Tidak punya akun? <a href="regist.php">Daftar</a>
 										</p>
 									</div>
 								</div>
@@ -81,6 +137,4 @@
 	<!-- end wrapper -->
 </body>
 
-
-<!-- Mirrored from codervent.com/syndash/demo/vertical/authentication-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 31 Jan 2021 10:24:09 GMT -->
 </html>

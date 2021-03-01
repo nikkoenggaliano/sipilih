@@ -44,17 +44,17 @@
 	<!--end switcher-->
 	<!-- JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/popper.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="<?php echo fixdir; ?>assets/js/jquery.min.js"></script>
+	<script src="<?php echo fixdir; ?>assets/js/popper.min.js"></script>
+	<script src="<?php echo fixdir; ?>assets/js/bootstrap.min.js"></script>
+	<script src="<?php echo fixdir; ?>assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<script src="<?php echo fixdir; ?>assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
 	<!--plugins-->
-	<script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
-	<script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
-	<script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<script src="<?php echo fixdir; ?>assets/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="<?php echo fixdir; ?>assets/plugins/metismenu/js/metisMenu.min.js"></script>
 	<!-- App JS -->
-	<script src="assets/js/app.js"></script>
+	<script src="<?php echo fixdir; ?>assets/js/app.js"></script>
 </body>
-
-
-<!-- Mirrored from codervent.com/syndash/demo/vertical/pricing-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 31 Jan 2021 10:24:13 GMT -->
 </html>
+
+<?php ob_end_flush(); ?>

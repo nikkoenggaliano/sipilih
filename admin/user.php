@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include '../config/header.php'; ?>
 		<div class="page-wrapper">
 			<!--page-content-wrapper-->
 			<div class="page-content-wrapper">
@@ -57,4 +57,4 @@
 			</div>
 			<!--end page-content-wrapper-->
 		</div>
-<?php include 'footer.php'; ?>
+<?php include '../config/footer.php'; ?>
