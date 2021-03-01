@@ -15,7 +15,7 @@ $conn = mysqli_connect($sql_details['host'], $sql_details['user'], $sql_details[
 
 $hostUri = "http://localhost/";
 
-$fixdir = "/sipilih/";define("fixdir", $fixdir);
+$fixdir = "/habby/sipilih/";define("fixdir", $fixdir);
 
 
 function _Filters($data){

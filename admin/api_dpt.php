@@ -1,9 +1,6 @@
 <?php 
 include '../config/config.php';
-if($_SESSION['role'] != 'admin'){
-	header("location: ../logout.php");
-	exit;
-}
+
 if(isset($_GET['dptid'])){
 
 	$nik = _filters($_GET['dptid']);

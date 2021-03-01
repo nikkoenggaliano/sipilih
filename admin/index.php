@@ -12,6 +12,9 @@ $jumlah_sudah_melakukan_vote = mysqli_num_rows(mysqli_query($conn, "SELECT `id` 
 $jumlah_dpt_perempuan = $jumlah_dpt - $jumlah_dpt_laki;
 $selisih = $jumlah_dpt - $jumlah_user;
 
+$lastest_vote = mysqli_fetch_all(mysqli_query($conn, "SELECT `p`.`id`, `p`.`uid`, `p`.`date`,`u`.`username` FROM `pemilih` `p` LEFT JOIN `user` `u` ON `p`.`uid` = `u`.`id` LIMIT 10"));
+var_dump($lastest_vote);
+
 ?>
 		<div class="page-wrapper">
 			<!--page-content-wrapper-->
@@ -80,7 +83,7 @@ $selisih = $jumlah_dpt - $jumlah_user;
 									<div class="card-body text-center">
 										<div class="widgets-icons mx-auto bg-white rounded-circle"><i class="bx bx-cloud-download"></i>
 										</div>
-										<h4 class="mb-0 font-weight-bold mt-3 text-white"><?php $jumlah_sudah_melakukan_vote; ?></h4>
+										<h4 class="mb-0 font-weight-bold mt-3 text-white"><?php echo $jumlah_sudah_melakukan_vote; ?></h4>
 										<p class="mb-0 text-white">DPT yang telah voting</p>
 									</div>
 								</div>
@@ -91,75 +94,28 @@ $selisih = $jumlah_dpt - $jumlah_user;
 								<div class="card-body">
 									<div class="d-lg-flex align-items-center mb-4">
 										<div>
-											<h5 class="mb-0">Social Media Traffic</h5>
+											<h5 class="mb-0">Pemilih Terakhir</h5>
 										</div>
 										<div class="ml-auto">
-											<h3 class="mb-0"><span class="font-14">Total Visits:</span> 874</h3>
+											<h3 class="mb-0"><span class="font-14">Total Pemilih:</span> <?php echo $jumlah_sudah_melakukan_vote; ?></h3>
 										</div>
 									</div>
 									<hr>
 									<div class="dashboard-social-list ps ps--active-y">
 										<ul class="list-group list-group-flush">
+											<?php 
+												foreach ($lastest_vote as $last) {
+													
+											?>
 											<li class="list-group-item d-flex align-items-center">
 												<div class="media align-items-center">
-													<div class="widgets-social bg-youtube rounded-circle text-white"><i class="bx bxl-youtube"></i>
-													</div>
 													<div class="media-body ml-2">
-														<h6 class="mb-0">YouTube</h6>
+														<h6 class="mb-0"><?php echo $last[3]; ?></h6>
 													</div>
 												</div>
-												<div class="ml-auto">298</div>
+												<div class="ml-auto"><?php echo $last[2]; ?></div>
 											</li>
-											<li class="list-group-item d-flex align-items-center">
-												<div class="media align-items-center">
-													<div class="widgets-social bg-facebook rounded-circle text-white"><i class="bx bxl-facebook"></i>
-													</div>
-													<div class="media-body ml-2">
-														<h6 class="mb-0">Facebook</h6>
-													</div>
-												</div>
-												<div class="ml-auto">324</div>
-											</li>
-											<li class="list-group-item d-flex align-items-center">
-												<div class="media align-items-center">
-													<div class="widgets-social bg-linkedin rounded-circle text-white"><i class="bx bxl-linkedin"></i>
-													</div>
-													<div class="media-body ml-2">
-														<h6 class="mb-0">Linkedin</h6>
-													</div>
-												</div>
-												<div class="ml-auto">127</div>
-											</li>
-											<li class="list-group-item d-flex align-items-center">
-												<div class="media align-items-center">
-													<div class="widgets-social bg-twitter rounded-circle text-white"><i class="bx bxl-twitter"></i>
-													</div>
-													<div class="media-body ml-2">
-														<h6 class="mb-0">Twitter</h6>
-													</div>
-												</div>
-												<div class="ml-auto">325</div>
-											</li>
-											<li class="list-group-item d-flex align-items-center">
-												<div class="media align-items-center">
-													<div class="widgets-social bg-tumblr rounded-circle text-white"><i class="bx bxl-tumblr"></i>
-													</div>
-													<div class="media-body ml-2">
-														<h6 class="mb-0">Tumblr</h6>
-													</div>
-												</div>
-												<div class="ml-auto">287</div>
-											</li>
-											<li class="list-group-item d-flex align-items-center">
-												<div class="media align-items-center">
-													<div class="widgets-social bg-dribbble rounded-circle text-white"><i class="bx bxl-dribbble"></i>
-													</div>
-													<div class="media-body ml-2">
-														<h6 class="mb-0">Dribbble</h6>
-													</div>
-												</div>
-												<div class="ml-auto">154</div>
-											</li>
+											<?php } ?>
 										</ul>
 									<div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 230px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 136px;"></div></div></div>
 								</div>
