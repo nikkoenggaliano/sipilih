@@ -54,7 +54,7 @@ if(isset($_POST['username'], $_POST['password'])){
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<title>Syndash - Bootstrap4 Admin Template</title>
+	<title>Masuk ke Sistem</title>
 	<!--favicon-->
 	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
 	<!-- loader-->
