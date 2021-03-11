@@ -1,4 +1,4 @@
-<?php include './config/header.php'; 
+<?php include '../config/header.php'; 
 
 	function persen($jumlah, $total){
 		return ($jumlah/$total)*100;
@@ -100,7 +100,7 @@ if(!isset($_SESSION['username'])){
 			</div>
 			<!--end page-content-wrapper-->
 		</div>
-<?php include './config/footer.php'; ?>
+<?php include '../config/footer.php'; ?>
 
 <link href="<?php echo fixdir; ?>assets/plugins/highcharts/css/highcharts.css" rel="stylesheet" />
 <script src="<?php echo fixdir; ?>assets/plugins/highcharts/js/highcharts.js"></script>

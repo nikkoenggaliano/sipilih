@@ -41,7 +41,7 @@ if(mysqli_num_rows(mysqli_query($conn, "SELECT `id` FROM pemilih WHERE uid = {$u
 								<div class="col-12 col-md-10 text-center">
 									<div class="heading pb-4">
 										<h2>Berikut ini Kandidat</h2>
-										<h5 class="font-weight-normal lis-light">Calon Ketua RT 01 RW 01 Kludan Sidoarjo</h5>
+										<h5 class="font-weight-normal lis-light">Calon Ketua RT 01 RW 03 Kludan Sidoarjo</h5>
 									</div>
 								</div>
 							</div>

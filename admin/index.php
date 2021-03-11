@@ -12,8 +12,7 @@ $jumlah_sudah_melakukan_vote = mysqli_num_rows(mysqli_query($conn, "SELECT `id` 
 $jumlah_dpt_perempuan = $jumlah_dpt - $jumlah_dpt_laki;
 $selisih = $jumlah_dpt - $jumlah_user;
 
-$lastest_vote = mysqli_fetch_all(mysqli_query($conn, "SELECT `p`.`id`, `p`.`uid`, `p`.`date`,`u`.`username` FROM `pemilih` `p` LEFT JOIN `user` `u` ON `p`.`uid` = `u`.`id` LIMIT 10"));
-var_dump($lastest_vote);
+$lastest_vote = mysqli_fetch_all(mysqli_query($conn, "SELECT p.id, p.uid, p.date, u.username, d.nama FROM pemilih p LEFT JOIN user u ON p.uid = u.dptid LEFT JOIN dpt d ON p.uid = d.id ORDER BY `p`.`id` DESC LIMIT 10"));
 
 ?>
 		<div class="page-wrapper">
@@ -110,7 +109,8 @@ var_dump($lastest_vote);
 											<li class="list-group-item d-flex align-items-center">
 												<div class="media align-items-center">
 													<div class="media-body ml-2">
-														<h6 class="mb-0"><?php echo $last[3]; ?></h6>
+														<h5 class="mb-0"><?php echo $last[4]; ?></h5>
+														<h6>(<?php echo $last[3]; ?>)</h6>
 													</div>
 												</div>
 												<div class="ml-auto"><?php echo $last[2]; ?></div>

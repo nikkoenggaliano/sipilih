@@ -31,16 +31,35 @@ if(isset($_FILES['dpt'])){
 		$spreadsheet = $reader->load($fixpath.$new_name);
 		$sheetData = $spreadsheet->getActiveSheet()->toArray();
 		unset($sheetData[0]);
+		$success_count = 0;
+		$fail_count = 0;
+		$counted = count($sheetData);
+		$fail_erorr = "";
 		foreach ($sheetData as $value) {
 			$nik = _filters($value[0]);
 			$nama = _filters($value[1]);
 			$kelamin = _filters($value[2]);
 			$tgl_lahir = _filters($value[3]);
 			$query = "INSERT INTO `dpt` (`id`, `nik`, `nama`, `kelamin`, `tgl_lahir`) VALUES (NULL, '{$nik}', '{$nama}', '{$kelamin}', '$tgl_lahir');";
-			mysqli_query($conn, $query);
+			if(mysqli_query($conn, $query)){
+				$theid = mysqli_insert_id($conn);
+				$username = generateRandomString(2, $nik).generateRandomString(2).generateRandomString(2).generateRandomString(2, $nik);
+				$query = "INSERT INTO `user` (`id`, `dptid`, `username`, `password`, `role`) VALUES (NULL, '{$theid}', '{$username}', '', 'user')";
+				if(mysqli_query($conn, $query)){
+					$success_count++;
+				}else{
+					$fail_count++;
+					$fail_erorr .= "Insert 2 ".mysqli_error($conn)."\n";
+				}
+			}else{
+				$fail_count++;
+				$fail_erorr .= "Insert 1 ".mysqli_error($conn)."\n";
+			}
+			
 		}
+
 		$_SESSION['header'] = 'Yea!';
-		$_SESSION['isi'] = 'Data DPT Telah berhasil dimasukan!';
+		$_SESSION['isi'] = "Jumlah data diunggah {$counted} jumlah data berhasil dimasukan {$success_count} jumlah data yang gagal {$fail_count} ".$fail_erorr;
 		$_SESSION['type'] = 'success';
 		header("location: unggah_dpt.php");
 		exit;

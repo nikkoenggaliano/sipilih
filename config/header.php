@@ -103,6 +103,13 @@ include 'config.php';
 						<li> <a href="daftar_akun.php"><i class="bx bx-right-arrow-alt"></i>Akun Terdaftar</a>
 					</ul>
 				</li>
+				<li>
+					<a href="hasil.php" aria-expanded="true">
+						<div class="parent-icon icon-color-7"><i class="bx bx-file"></i>
+						</div>
+						<div class="menu-title">Hasil Pemilihan</div>
+					</a>
+				</li>
 			<?php } ?>
 			</ul>
 			<!--end navigation-->

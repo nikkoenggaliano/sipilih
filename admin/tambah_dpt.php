@@ -20,11 +20,22 @@ if(isset($_POST['nik'], $_POST['nama'], $_POST['kelamin'], $_POST['tgl_lahir']))
 
 	if(mysqli_query($conn, $query)){
 
-		$_SESSION['header'] = 'Yea!';
-		$_SESSION['isi'] = 'Data DPT dimasukan!';
-		$_SESSION['type'] = 'success';
-		header("location: tambah_dpt.php");
-		exit;
+		$theid = mysqli_insert_id($conn);
+		$username = generateRandomString(2, $nik).generateRandomString(2).generateRandomString(2).generateRandomString(2, $nik);
+		$query = "INSERT INTO `user` (`id`, `dptid`, `username`, `password`, `role`) VALUES (NULL, '{$theid}', '{$username}', '', 'user')";
+		if(mysqli_query($conn, $query)){
+			$_SESSION['header'] = 'Yea!';
+			$_SESSION['isi'] = 'Data DPT dimasukan!';
+			$_SESSION['type'] = 'success';
+			header("location: tambah_dpt.php");
+			exit;
+		}else{
+			$_SESSION['header'] = 'Woops!!';
+			$_SESSION['isi'] = 'Akun telah gagal dimasukan!';
+			$_SESSION['type'] = 'info';
+			header("location: tambah_dpt.php");
+			exit;
+		}
 
 	}else{
 

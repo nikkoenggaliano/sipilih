@@ -15,7 +15,7 @@ if(!isset($_SESSION['username'])){
 if(isset($_POST['kid'])){
 
 	$id = (int) _Filters($_POST['kid']);
-	$uid = $_SESSION['id'];
+	$uid = $_SESSION['dptid']; //dpt id
 
 	if(mysqli_num_rows(mysqli_query($conn, "SELECT * FROM `kandidat` WHERE `id` = {$id}")) == 1){
 

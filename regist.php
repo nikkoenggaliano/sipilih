@@ -10,15 +10,32 @@ if(isset($_POST['username'], $_POST['password'], $_POST['nik'])){
 
 	if($cek_nik['status'] == 200){
 		$dptid = $cek_nik['id'];
-		$query = "INSERT INTO `user` (`id`, `dptid`, `username`, `password`, `role`) VALUES (NULL, '{$dptid}', '{$username}', '{$password}', 'user')";
+		#$query = "INSERT INTO `user` (`id`, `dptid`, `username`, `password`, `role`) VALUES (NULL, '{$dptid}', '{$username}', '{$password}', 'user')";
+		
+		$query = "UPDATE `user` SET `password` = '{$password}' WHERE `dptid` = '{$dptid}'";
 		$query2 = "SELECT * FROM `user` WHERE `dptid` = ".$dptid;
 
-		if(mysqli_num_rows( mysqli_query($conn, $query2)) != 0 ){
-			$_SESSION['header'] = 'Hays!!';
-			$_SESSION['isi'] = 'Pendaftaran Akun Gagal! Kamu sudah terdaftar!';
-			$_SESSION['type'] = 'error';
+		// if(mysqli_num_rows( mysqli_query($conn, $query2)) != 0 ){
+		// 	$_SESSION['header'] = 'Hays!!';
+		// 	$_SESSION['isi'] = 'Pendaftaran Akun Gagal! Kamu sudah terdaftar!';
+		// 	$_SESSION['type'] = 'error';
+		// 	header("location: regist.php");
+		// 	exit;	
+		// }
+
+
+		$data_query2 = mysqli_fetch_array(mysqli_query($conn, $query2));
+
+
+		if($data_query2['username'] != $username){
+
+			$_SESSION['header'] = 'Ooppss!!';
+			$_SESSION['isi'] = 'Username kamu salah!';
+			$_SESSION['type'] = 'warning';
 			header("location: regist.php");
 			exit;	
+
+
 		}
 
 		if(mysqli_query($conn, $query)){
@@ -97,7 +114,7 @@ if(isset($_POST['username'], $_POST['password'], $_POST['nik'])){
 									<div class="login-separater text-center"> <span>Silahkan Mendaftar di sini</span>
 										<hr/>
 									</div>
-									<form action="#" method="POST">
+									<form action="#" method="POST" autocomplete="off">
 									<div class="form-group mt-4">
 										<label>NIK (Nomer Induk Keluarga)</label>
 										<input type="text" id="nik" name="nik" class="form-control" placeholder="16 Digit Nomer NIK" onkeyup="getDPT(this)" maxlength="16"/>
